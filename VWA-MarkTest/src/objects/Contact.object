@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Age_Category__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISNULL(Computed_Age__c), &quot;Unknown&quot;,  
+IF(Computed_Age__c &lt; 15, &quot;&lt;15&quot;,
+IF(Computed_Age__c &lt;= 18, &quot;15-18&quot;, 
+IF(Computed_Age__c &lt;= 25, &quot;19-25&quot;,
+IF(Computed_Age__c &lt;= 35, &quot;26-35&quot;,
+IF(Computed_Age__c &lt;= 54, &quot;36-54&quot;,&quot;55+&quot;))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Age Category</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Computed_Age__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( NOT( ISBLANK( Birthdate ) ) ,
+  IF( DATE( 2000 , MONTH( Birthdate ) , DAY( Birthdate ) ) &lt;= DATE( 2000 , MONTH( TODAY() ) , DAY( TODAY() ) ),
+     YEAR (Today()) - YEAR ( Birthdate ),
+     YEAR (Today()) - YEAR ( Birthdate ) -1 ),
+  null)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Computed Age</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unique_Contact__c</fullName>
+        <externalId>false</externalId>
+        <formula>1</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unique Contact</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>
