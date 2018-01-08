@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>Contact.Age_Category__c</members>
-        <members>Contact.Computed_Age__c</members>
-        <members>Contact.Unique_Contact__c</members>
-        <name>CustomField</name>
-    </types>
-    <types>
         <members>Testing_Contact_Attributes</members>
         <name>ReportType</name>
     </types>
@@ -15,6 +9,17 @@
         <members>GW_Volunteers__Volunteer_Reports/Age_Range_Report_3</members>
         <members>GW_Volunteers__Volunteer_Reports/Ethnicity_Report</members>
         <name>Report</name>
+    </types>
+    <types>
+        <members>GW_Volunteers__Volunteer_Job__c</members>
+        <members>Accomplishment__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Contact.Age_Category__c</members>
+        <members>Contact.Computed_Age__c</members>
+        <members>Contact.Unique_Contact__c</members>
+        <name>CustomField</name>
     </types>
     <version>38.0</version>
 </Package>

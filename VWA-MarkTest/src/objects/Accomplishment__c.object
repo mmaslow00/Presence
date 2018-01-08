@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Acreage Impacted</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Buckwheat Plants Removed</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Buckwheat Plants Trimmed</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Campsites Cleaned / Enhanced</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Campsites Removed</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Fire Permits Issued</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>LBS of Trash Removed</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Logs Removed</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Miles of Trail Monitored</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Structures Built</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Structures Maintained</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Violations Observed</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Visitor Contacts</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Yards of Trail (Re)Constructed</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Yards of Trail Brushed</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Yards of Tread Maintained</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Volunteer_Job__c</fullName>
+        <externalId>false</externalId>
+        <label>Volunteer Job</label>
+        <referenceTo>GW_Volunteers__Volunteer_Job__c</referenceTo>
+        <relationshipLabel>Accomplishments</relationshipLabel>
+        <relationshipName>Accomplishments</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <label>Accomplishment</label>
+    <nameField>
+        <displayFormat>A-{00000000}</displayFormat>
+        <label>Accomplishment Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Accomplishments</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

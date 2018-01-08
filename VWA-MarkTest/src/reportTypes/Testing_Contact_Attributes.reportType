@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
     <baseObject>Contact</baseObject>
-    <category>admin</category>
+    <category>other</category>
     <deployed>false</deployed>
-    <description>Testing Contact Attributes</description>
+    <description>Volunteer Contact Attributes</description>
     <join>
         <outerJoin>false</outerJoin>
         <relationship>GW_Volunteers__Volunteer_Hours__r</relationship>
     </join>
-    <label>Testing Contact Attributes</label>
+    <label>Volunteer Contact Attributes</label>
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
