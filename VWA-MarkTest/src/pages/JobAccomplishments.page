@@ -1,0 +1,26 @@
+<apex:page standardController="GW_Volunteers__Volunteer_Job__c" extensions="AccomplishmentCtl">
+<head>
+<style type="text/css">
+ 
+ .odd { 
+         background-color: #FCF7F7;
+}
+.even {
+         background-color: #E3DCDB;
+}
+</style>
+</head>
+<body>
+<apex:form>
+	<apex:dataTable value="{!displayList}" var="dl" cellpadding="1" rowClasses="even,odd">
+		<apex:column>
+			{!dl.acType}
+		</apex:column>
+		<apex:column>
+			<apex:inputText value="{!dl.amount}" size="5"/>
+		</apex:column>	
+	</apex:dataTable>
+	<apex:commandButton value="Save Accomplishments" action="{!save}" />
+</apex:form>
+</body>
+</apex:page>
