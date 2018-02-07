@@ -1,26 +1,35 @@
-<apex:page standardController="GW_Volunteers__Volunteer_Job__c" extensions="AccomplishmentCtl">
+<apex:page standardController="GW_Volunteers__Volunteer_Job__c" extensions="AccomplishmentCtl" docType="html-5.0">
 <head>
 <style type="text/css">
  
  .odd { 
-         background-color: #FCF7F7;
+         background-color: #ffffff;
 }
 .even {
-         background-color: #E3DCDB;
+         background-color: #dee1e5;
+}
+.center {
+	text-align:center;
+}
+.indent {
+	margin-left:30px;
+	margin-top:5px;
 }
 </style>
 </head>
 <body>
-<apex:form>
+<apex:form >
 	<apex:dataTable value="{!displayList}" var="dl" cellpadding="1" rowClasses="even,odd">
-		<apex:column>
+		<apex:column >
 			{!dl.acType}
 		</apex:column>
-		<apex:column>
-			<apex:inputText value="{!dl.amount}" size="5"/>
+		<apex:column >
+			<apex:input type="number" html-min="0" value="{!dl.amount}"/>
 		</apex:column>	
 	</apex:dataTable>
-	<apex:commandButton value="Save Accomplishments" action="{!save}" />
+	<div class="indent">
+	<apex:commandButton value="Save Accomplishments" action="{!save}"/>
+	</div>
 </apex:form>
 </body>
 </apex:page>
