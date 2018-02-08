@@ -3,20 +3,20 @@ public with sharing class AccomplishmentCtl {
         this.volunteerJob = (GW_Volunteers__Volunteer_Job__c)stdController.getRecord();
     }
 	public GW_Volunteers__Volunteer_Job__c volunteerJob;
-    public List<AcDisplay> displayList;
+    public List<Accomplishment__c> displayList;
     Map<String, Accomplishment__c> acMap = new Map<String, Accomplishment__c>();
     
-    public List<AcDisplay> getDisplayList() {
+    public List<Accomplishment__c> getDisplayList() {
     	if(displayList == null) {
 	    	Schema.DescribeFieldResult fieldResult = Accomplishment__c.Type__c.getDescribe();
 	    	List<Schema.PicklistEntry> ple = fieldResult.getPicklistValues();
 	    	for(Schema.PicklistEntry entry : ple) {
 	   			acMap.put(entry.getValue(), 
-	   				new Accomplishment__c(Type__c = entry.getValue()));
+	   				new Accomplishment__c(Type__c = entry.getValue(), Volunteer_Job__c = volunteerJob.Id));
 	    	}
 	    	
 	    	for(Accomplishment__c acmp : [
-					SELECT Id, Type__c, Amount__c 
+					SELECT Id, Type__c, Amount__c, Volunteer_Job__c 
 					FROM Accomplishment__c
 					WHERE Volunteer_Job__c = :volunteerJob.Id
 					]) 
@@ -26,11 +26,10 @@ public with sharing class AccomplishmentCtl {
 		    		mapped.Amount__c = acmp.Amount__c;
 		    	}
 	    	
-	    	displayList = new List<AcDisplay>();
+	    	displayList = new List<Accomplishment__c>();
 	    	for(String tp : acMap.keySet()) {
 	    		Accomplishment__c acmp = acMap.get(tp);
-	    		AcDisplay acDisp = new AcDisplay(acmp.id, acmp.Type__c, acmp.Amount__c);
-	    		displayList.add(acDisp);
+	    		displayList.add(acmp);
 	    	}
     	}
     	return displayList;
@@ -38,13 +37,12 @@ public with sharing class AccomplishmentCtl {
     public PageReference save() {
     	List<Accomplishment__c> toUpsert = new List<Accomplishment__c>();
     	List<Accomplishment__c> toDelete = new List<Accomplishment__c>();
-    	for(AcDisplay disp : displayList) {
-    		if(disp.amount > 0) {
-    			toUpsert.add(
-    				new Accomplishment__c(Id=disp.Id, Type__c=disp.acType, Amount__c=disp.amount, Volunteer_Job__c=volunteerJob.Id));
+    	for(Accomplishment__c disp : displayList) {
+    		if(disp.Amount__c > 0) {
+    			toUpsert.add(disp);
     		}
     		else if(disp.Id != null) {
-    			toDelete.add(new Accomplishment__c(Id=disp.Id));
+    			toDelete.add(disp);
     		}
     	}
     	if( ! toUpsert.isEmpty()) {
@@ -55,15 +53,5 @@ public with sharing class AccomplishmentCtl {
     	}
         displayList = null;
     	return null;
-    }
-    public Class AcDisplay {
-    	public AcDisplay(String id, String acType, Decimal amount) {
-    		this.id=id;
-    		this.acType=acType;
-    		this.amount=amount;
-    	}
-    	public String id {get; set;}
-    	public String acType {get; set;}
-    	public Decimal amount {get; set;}
     }
 }

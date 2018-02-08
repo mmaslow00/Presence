@@ -21,10 +21,10 @@
 <apex:form >
 	<apex:dataTable value="{!displayList}" var="dl" cellpadding="1" rowClasses="even,odd">
 		<apex:column >
-			{!dl.acType}
+			{!dl.Type__c}
 		</apex:column>
 		<apex:column >
-			<apex:input type="number" html-min="0" value="{!dl.amount}"/>
+			<apex:inputField type="number" html-min="0" value="{!dl.Amount__c}"/>
 		</apex:column>	
 	</apex:dataTable>
 	<div class="indent">

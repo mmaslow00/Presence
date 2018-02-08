@@ -29,13 +29,13 @@ private class AccomplishmentCtlTest {
 	}        
     static testMethod void myUnitTest() {
     	init();
-    	List<AccomplishmentCtl.AcDisplay> displayList = ext.getDisplayList();
-    	for(AccomplishmentCtl.AcDisplay disp : displayList) {
+    	List<Accomplishment__c> displayList = ext.getDisplayList();
+    	for(Accomplishment__c disp : displayList) {
     		if(disp.Id != null) {
-    			disp.amount = 0;
+    			disp.Amount__c = 0;
     		}
     	}
-    	displayList.add(new AccomplishmentCtl.AcDisplay(null, 'Acreage Impacted', 5));
+    	displayList.add(new Accomplishment__c(Type__c='Acreage Impacted', Amount__c = 5, Volunteer_Job__c = job.Id));
     	ext.save();
     	
 		List<Accomplishment__c> acList = [
