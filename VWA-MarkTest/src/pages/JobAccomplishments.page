@@ -24,7 +24,7 @@
 			{!dl.Type__c}
 		</apex:column>
 		<apex:column >
-			<apex:inputField type="number" html-min="0" value="{!dl.Amount__c}"/>
+			<apex:inputField type="number" html-min="0" html-step=".1" value="{!dl.Amount__c}"/>
 		</apex:column>	
 	</apex:dataTable>
 	<div class="indent">

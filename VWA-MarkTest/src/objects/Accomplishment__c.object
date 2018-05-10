@@ -53,12 +53,11 @@
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
         <fullName>Amount__c</fullName>
-        <defaultValue>0</defaultValue>
         <externalId>false</externalId>
         <label>Amount</label>
         <precision>18</precision>
         <required>false</required>
-        <scale>0</scale>
+        <scale>1</scale>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
