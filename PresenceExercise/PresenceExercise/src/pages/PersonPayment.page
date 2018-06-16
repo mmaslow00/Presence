@@ -1,0 +1,15 @@
+<apex:page controller="PersonPaymentsController">
+<apex:form>
+<apex:repeat value="{!personPaymentList}" var="persPay">
+<p>
+	First Name: {!persPay.payor.FirstName} Last Name: {!persPay.payor.LastName} Total Paid: {!persPay.payor.totalPayments}
+</p>
+
+	<apex:repeat value="{!persPay.paymentList}" var="pay">
+		Amount: <apex:inputField value="{!pay.inputPayment.Amount__c}"/> Date: <apex:inputField value="{!pay.inputPayment.Date_Paid__c}"/>
+	</apex:repeat>
+	<br/>
+	<br/>
+</apex:repeat>
+</apex:form>
+</apex:page>
