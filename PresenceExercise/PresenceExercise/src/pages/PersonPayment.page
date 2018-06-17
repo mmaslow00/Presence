@@ -36,12 +36,14 @@
 .buttons {
 	text-align:center;
 	clear:both;
+	margin-bottom:5px;
 }
 
 </style>
 <apex:form >
 <div class="container">
 <apex:repeat value="{!personPaymentList}" var="persPay">
+	<apex:outputPanel id="thisRow">
 	<div class="grid-container">
 		<div class="grid-item">
 			{!persPay.payor.firstName} {!persPay.payor.lastName}
@@ -74,10 +76,13 @@
 	</table>
 	</div>
 	<div class="buttons">
-	<apex:commandButton action="{!save}" value="Save"/>
+	<apex:commandButton action="{!save}" value="Save"
+		reRender="thisRow"
+	>
+		<apex:param name="selectedRowNum" value="{!persPay.rowNum}" assignTo="{!selectedRownum}"/>
+	</apex:commandButton>
 	</div>
-	<br/>
-	<br/>
+	</apex:outputPanel>
 </apex:repeat>
 </div>
 </apex:form>

@@ -1,5 +1,7 @@
 public with sharing class PersonPaymentsController {
 	List<PersonPayment> personPaymentList;
+	public String selectedRownum {get; set;}
+	public String selectedString {get; set;}
 	
 	public List<personPayment> getPersonPaymentList() {
 		List<Payment__c> paymentList = [
@@ -17,13 +19,14 @@ public with sharing class PersonPaymentsController {
 		pers.firstName = firstRow.Contact__r.FirstName;
 		pers.lastName = firstRow.Contact__r.LastName;
 		pers.totalPayments = firstRow.Contact__r.Total_Payments__c;
-		
+		Integer personNum = 0;
 		while(rowNum < paymentList.size()) {
 			Payment__c payment = paymentList.get(rowNum);
 			if(payment.Contact__c != pers.contactId) {
 				PersonPayment persPay = new PersonPayment();
 				persPay.payor = pers;
 				persPay.paymentList = wrapList;
+				persPay.rowNum = personNum++;
 				personPaymentList.add(persPay);
 
 				pers = new Person();
@@ -44,6 +47,7 @@ public with sharing class PersonPaymentsController {
 		PersonPayment persPay = new PersonPayment();
 		persPay.payor = pers;
 		persPay.paymentList = wrapList;
+		persPay.rowNum = personNum++;
 		personPaymentList.add(persPay);
 
 		return personPaymentList;
@@ -75,6 +79,7 @@ public with sharing class PersonPaymentsController {
 		public Date lastDate {get; set;}
 	}
  	class PersonPayment {
+ 		public Integer rowNum {get; set;}
  		public Person payor {get; set;}
  		public List<PaymentWrapper> paymentList {get; set;}
  	}
