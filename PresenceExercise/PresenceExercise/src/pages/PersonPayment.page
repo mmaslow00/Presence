@@ -1,15 +1,92 @@
 <apex:page controller="PersonPaymentsController">
-<apex:form>
-<apex:repeat value="{!personPaymentList}" var="persPay">
-<p>
-	First Name: {!persPay.payor.FirstName} Last Name: {!persPay.payor.LastName} Total Paid: {!persPay.payor.totalPayments}
-</p>
+<style>
+.container {
+	width:50%;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+  float:left;
+  clear:both;
+  width:100%;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  font-size: 12px;
+  text-align: center;
+}
+.paymentList {
+	float:left;
+	clear:both;
+	margin-top:5px;
+	margin-bottom:5px;
+	margin-left:10%;
+	width:100%;
+}
+.paymentItem {
+	align:left;
+	clear:both;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.dateInput {
+	align:left;
+	clear:both;
+}
+.label {
+	font-weight: bold;
+	padding-right: 5px;
+}
+.buttons {
+	text-align:center;
+	clear:both;
+}
 
+</style>
+<apex:form >
+<div class="container">
+<apex:repeat value="{!personPaymentList}" var="persPay">
+	<div class="grid-container">
+		<div class="grid-item">
+			{!persPay.payor.firstName} {!persPay.payor.lastName}
+		</div>
+		<div class="grid-item">
+			Total Paid: {!persPay.payor.totalPayments}
+		</div>
+		<div class="grid-item">
+			Last Payment: 
+			<apex:outputText id="lastPayment" value="{0, date, MM/dd/yyyy}">
+			    <apex:param value="{!persPay.payor.lastDate}" /> 
+			</apex:outputText>	
+		</div>
+	</div>
+
+	<div class="paymentList">
+	<table>
+		<th>Amount</th>
+		<th>Date Paid</th>
 	<apex:repeat value="{!persPay.paymentList}" var="pay">
-		Amount: <apex:inputField value="{!pay.inputPayment.Amount__c}"/> Date: <apex:inputField value="{!pay.inputPayment.Date_Paid__c}"/>
+		<tr>
+			<td>
+			<apex:inputField id="Amount" value="{!pay.inputPayment.Amount__c}"/>
+			</td>
+			<td>
+			<apex:inputField id="dtPaid" value="{!pay.inputPayment.Date_Paid__c}"/>
+			</td>
+		</tr>
 	</apex:repeat>
+	</table>
+	</div>
+	<div class="buttons">
+	<apex:commandButton action="{!save}" value="Save"/>
+	</div>
 	<br/>
 	<br/>
 </apex:repeat>
+</div>
 </apex:form>
 </apex:page>
