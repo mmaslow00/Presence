@@ -1,7 +1,10 @@
-<apex:page controller="PersonPaymentsController">
+<apex:page controller="PersonPaymentsController"
+sidebar="false" showheader="false" docType="html-5.0"
+>
 <style>
 .container {
-	width:50%;
+	width:70%;
+	margin-left:20px;
 }
 .grid-container {
   display: grid;
@@ -46,7 +49,8 @@
 	border-bottom: solid;
 }
 </style>
-<apex:form >
+
+<apex:form id="personPaymentForm">
 <div class="container">
 <apex:repeat value="{!personPaymentList}" var="persPay">
 	<apex:outputPanel id="thisRow">
@@ -83,7 +87,7 @@
 			</apex:selectList>
 			</td>
 			<td>
-			<apex:inputField id="Amount" value="{!pay.inputPayment.Amount__c}"/>
+			<apex:inputField id="Amount" styleClass="inputAmount" value="{!pay.inputPayment.Amount__c}"/>
 			</td>
 			<td>
 			<apex:inputField id="dtPaid" value="{!pay.inputPayment.Date_Paid__c}"/>
