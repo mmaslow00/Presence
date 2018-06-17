@@ -11,6 +11,7 @@
   float:left;
   clear:both;
   width:100%;
+  margin-top:10px;
 }
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
@@ -24,7 +25,7 @@
 	clear:both;
 	margin-top:5px;
 	margin-bottom:5px;
-	margin-left:10%;
+	margin-left:5%;
 	width:100%;
 }
 .paymentItem {
@@ -38,12 +39,18 @@
 	clear:both;
 	margin-bottom:5px;
 }
-
+.saveButton {
+	margin-top:30px;
+}
+.payorItem {
+	border-bottom: solid;
+}
 </style>
 <apex:form >
 <div class="container">
 <apex:repeat value="{!personPaymentList}" var="persPay">
 	<apex:outputPanel id="thisRow">
+	<div class="payorItem">
 	<div class="grid-container">
 		<div class="grid-item">
 			{!persPay.payor.firstName} {!persPay.payor.lastName}
@@ -61,29 +68,44 @@
 
 	<div class="paymentList">
 	<table>
+		<th>Delete</th>
 		<th>Amount</th>
 		<th>Date Paid</th>
+		<th>Project</th>
 	<apex:repeat value="{!persPay.paymentList}" var="pay">
 		<tr>
+			<td>
+			<apex:inputCheckbox value="{!pay.inputPayment.isDeleted}"/>
+			</td>
 			<td>
 			<apex:inputField id="Amount" value="{!pay.inputPayment.Amount__c}"/>
 			</td>
 			<td>
 			<apex:inputField id="dtPaid" value="{!pay.inputPayment.Date_Paid__c}"/>
 			</td>
+			<td>
+			<apex:selectList value="{!pay.inputPayment.Project__c}" size="1">
+				<apex:selectOptions value="{!projectOptions}"/>
+			</apex:selectList>
+			</td>
 		</tr>
 	</apex:repeat>
 	</table>
 	</div>
 	<div class="buttons">
-	<apex:commandButton action="{!save}" value="Save"
+	<apex:commandButton action="{!addPayment}" value="Add Payment"
 		reRender="thisRow"
 	>
 		<apex:param name="selectedRowNum" value="{!persPay.rowNum}" assignTo="{!selectedRownum}"/>
 	</apex:commandButton>
 	</div>
+	</div>
 	</apex:outputPanel>
 </apex:repeat>
+<div class="buttons saveButton">
+<apex:commandButton action="{!save}" value="Save Changes"/>
+</div>
+
 </div>
 </apex:form>
 </apex:page>
