@@ -33,14 +33,6 @@
 	padding-top:5px;
 	padding-bottom:5px;
 }
-.dateInput {
-	align:left;
-	clear:both;
-}
-.label {
-	font-weight: bold;
-	padding-right: 5px;
-}
 .buttons {
 	text-align:center;
 	clear:both;
