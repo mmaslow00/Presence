@@ -69,24 +69,24 @@
 	<div class="paymentList">
 	<table>
 		<th>Delete</th>
+		<th>Project</th>
 		<th>Amount</th>
 		<th>Date Paid</th>
-		<th>Project</th>
 	<apex:repeat value="{!persPay.paymentList}" var="pay">
 		<tr>
 			<td>
-			<apex:inputCheckbox value="{!pay.inputPayment.isDeleted}"/>
+			<apex:inputCheckbox value="{!pay.isDeleted}"/>
+			</td>
+			<td>
+			<apex:selectList value="{!pay.inputPayment.Project__c}" size="1">
+				<apex:selectOptions value="{!projectOptions}"/>
+			</apex:selectList>
 			</td>
 			<td>
 			<apex:inputField id="Amount" value="{!pay.inputPayment.Amount__c}"/>
 			</td>
 			<td>
 			<apex:inputField id="dtPaid" value="{!pay.inputPayment.Date_Paid__c}"/>
-			</td>
-			<td>
-			<apex:selectList value="{!pay.inputPayment.Project__c}" size="1">
-				<apex:selectOptions value="{!projectOptions}"/>
-			</apex:selectList>
 			</td>
 		</tr>
 	</apex:repeat>
@@ -104,6 +104,7 @@
 </apex:repeat>
 <div class="buttons saveButton">
 <apex:commandButton action="{!save}" value="Save Changes"/>
+<apex:commandButton action="{!cancel}" immediate="true" value="Cancel Changes"/>
 </div>
 
 </div>

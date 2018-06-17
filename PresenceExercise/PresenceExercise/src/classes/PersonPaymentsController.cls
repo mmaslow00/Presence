@@ -10,7 +10,7 @@ public with sharing class PersonPaymentsController {
 				select id, Amount__c, Date_Paid__c, Contact__c, Project__c, 
 				Contact__r.FirstName, Contact__r.LastName, Contact__r.Total_Payments__c, Contact__r.Last_Payment_Date__c 
 				from Payment__c
-				order by Contact__r.LastName, Contact__r.FirstName, Id, Date_Paid__c desc
+				order by Contact__r.LastName, Contact__r.FirstName, Contact__c, Date_Paid__c desc
 			];
 			Integer rowNum=0;
 			Person pers = new Person();
@@ -62,28 +62,41 @@ public with sharing class PersonPaymentsController {
 		return personPaymentList;
 	}
 	public PageReference save() {
-		List<Payment__c> paymentList = new List<Payment__c>();
+		List<Payment__c> paymentsToUpsert = new List<Payment__c>();
+		List<Payment__c> paymentsToDelete = new List<Payment__c>();
 		for(PersonPayment pp : personPaymentList) {
 			for(paymentWrapper wrap : pp.paymentList) {
-				if(wrap.inputPayment.Amount__c != wrap.payment.Amount__c || 
-				wrap.inputPayment.Date_Paid__c != wrap.payment.Date_Paid__c || 
-				wrap.inputPayment.Project__c != wrap.payment.Project__c) {
-					Payment__c toUpdate = new Payment__c(
+				if(wrap.isDeleted) {
+					if(wrap.payment.Id != null) {
+						paymentsToDelete.add(wrap.payment);
+					}
+				}
+				else if(wrap.inputPayment.Amount__c != wrap.payment.Amount__c || 
+				  wrap.inputPayment.Date_Paid__c != wrap.payment.Date_Paid__c || 
+				  wrap.inputPayment.Project__c != wrap.payment.Project__c) {
+					Payment__c toUpsert = new Payment__c(
 						Id=wrap.payment.Id,
 						Contact__c = wrap.payment.Contact__c, 
 						Amount__c = wrap.inputPayment.Amount__c,
 						Date_Paid__c = wrap.inputPayment.Date_Paid__c,
 						Project__c = wrap.inputPayment.Project__c
 					);
-					paymentList.add(toUpdate);
+					paymentsToUpsert.add(toUpsert);
 				}
 			}
 		}
-		if( ! paymentList.isEmpty()) {
-			upsert paymentList;
+		if( ! paymentsToUpsert.isEmpty()) {
+			upsert paymentsToUpsert;
+		}
+		if( ! paymentsToDelete.isEmpty()) {
+			delete paymentsToDelete;
 		}
 		personPaymentList = null;
 		return null;
+	}
+	public PageReference cancel() {
+		personPaymentList = null;
+		return  null;
 	}
 	public List<SelectOption> getProjectOptions() {
 		if(projectOptions == null) {
