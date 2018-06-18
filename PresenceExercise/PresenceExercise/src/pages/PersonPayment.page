@@ -48,7 +48,63 @@ sidebar="false" showheader="false" docType="html-5.0"
 .payorItem {
 	border-bottom: solid;
 }
+.error {
+  color: #a94442;
+}
 </style>
+
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
+<apex:includeScript value="https://ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.min.js"/>
+
+<script>
+  $ = jQuery.noConflict();
+  
+  $.validator.addMethod(
+    "money",
+    function(value, element) {
+        var isValidMoney = /^\d{0,4}(\.\d{0,2})?$/.test(value);
+        return this.optional(element) || isValidMoney;
+    },
+    "<br/>A valid amount is required"
+  );  
+  
+jQuery.validator.addMethod(
+    "dateUS",
+    function(value, element) {
+        var check = false;
+        var re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+        if( re.test(value)){
+            var adata = value.split('/');
+            var mm = parseInt(adata[0],10);
+            var dd = parseInt(adata[1],10);
+            var yyyy = parseInt(adata[2],10);
+            var xdata = new Date(yyyy,mm-1,dd);
+            if ( ( xdata.getFullYear() == yyyy ) && ( xdata.getMonth () == mm - 1 ) && ( xdata.getDate() == dd ) )
+                check = true;
+            else
+                check = false;
+        } else
+            check = false;
+        return this.optional(element) || check;
+    },
+    "<br/>A date in the format m/d/yyyy is required"
+);
+ $.validator.addClassRules({
+	  inputAmount: {
+	    required: true,
+	    money: true
+	  },
+	  inputDate: {
+	  	required: true,
+	  	dateUS: true
+	  }
+  });  
+  $(document).ready(function() {
+      $('[id$=personPaymentForm]').validate();
+  });
+
+</script>
+
 
 <apex:form id="personPaymentForm">
 <div class="container">
@@ -90,7 +146,7 @@ sidebar="false" showheader="false" docType="html-5.0"
 			<apex:inputField id="Amount" styleClass="inputAmount" value="{!pay.inputPayment.Amount__c}"/>
 			</td>
 			<td>
-			<apex:inputField id="dtPaid" value="{!pay.inputPayment.Date_Paid__c}"/>
+			<apex:inputField id="dtPaid" styleClass="inputDate" value="{!pay.inputPayment.Date_Paid__c}"/>
 			</td>
 		</tr>
 	</apex:repeat>
@@ -108,7 +164,7 @@ sidebar="false" showheader="false" docType="html-5.0"
 </apex:repeat>
 <div class="buttons saveButton">
 <apex:commandButton action="{!save}" value="Save Changes"/>
-<apex:commandButton action="{!cancel}" immediate="true" value="Cancel Changes"/>
+<apex:commandButton action="{!cancel}" immediate="true" styleClass="cancel" value="Cancel Changes"/>
 </div>
 
 </div>
