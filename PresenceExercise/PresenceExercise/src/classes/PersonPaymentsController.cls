@@ -98,7 +98,7 @@ public with sharing class PersonPaymentsController {
 	public List<SelectOption> getProjectOptions() {
 		if(projectOptions == null) {
 			projectOptions = new List<SelectOption>();
-			for(Project__c proj : [select Id, Name from Project__c]) {
+			for(Project__c proj : [select Id, Name from Project__c order by Name]) {
 				projectOptions.add(new SelectOption(proj.Id, proj.Name));				
 			}
 		}

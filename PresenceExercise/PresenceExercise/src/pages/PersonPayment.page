@@ -1,5 +1,5 @@
 <apex:page controller="PersonPaymentsController"
-sidebar="false" docType="html-5.0"
+sidebar="false" showheader="false" docType="html-5.0"
 >
 <style>
 .container {
@@ -62,13 +62,13 @@ sidebar="false" docType="html-5.0"
   $.validator.addMethod(
     "money",
     function(value, element) {
-        var isValidMoney = /^\d{0,4}(\.\d{0,2})?$/.test(value);
+        var isValidMoney = /^(\d{1,3}(,\d{3})*(\.\d\d)?|\.\d\d)$/.test(value);  
         return this.optional(element) || isValidMoney;
     },
     "<br/>A valid amount is required"
   );  
   
-jQuery.validator.addMethod(
+  $.validator.addMethod(
     "dateUS",
     function(value, element) {
         var check = false;
@@ -87,7 +87,7 @@ jQuery.validator.addMethod(
             check = false;
         return this.optional(element) || check;
     },
-    "<br/>A date in the format m/d/yyyy is required"
+    "<br/>A date in format m/d/yyyy is required"
 );
  $.validator.addClassRules({
 	  inputAmount: {
