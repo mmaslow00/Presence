@@ -1,7 +1,6 @@
 public with sharing class PersonPaymentsController {
-	List<PersonPayment> personPaymentList;
+	public List<PersonPayment> personPaymentList;
 	public String selectedRownum {get; set;}
-	public String selectedString {get; set;}
 	public List<SelectOption> projectOptions;
 	
 	public List<personPayment> getPersonPaymentList() {
@@ -71,9 +70,7 @@ public with sharing class PersonPaymentsController {
 						paymentsToDelete.add(wrap.payment);
 					}
 				}
-				else if(wrap.inputPayment.Amount__c != wrap.payment.Amount__c || 
-				  wrap.inputPayment.Date_Paid__c != wrap.payment.Date_Paid__c || 
-				  wrap.inputPayment.Project__c != wrap.payment.Project__c) {
+				else if(wrap.inputPayment.Amount__c != wrap.payment.Amount__c || wrap.inputPayment.Date_Paid__c != wrap.payment.Date_Paid__c || wrap.inputPayment.Project__c != wrap.payment.Project__c) {
 					Payment__c toUpsert = new Payment__c(
 						Id=wrap.payment.Id,
 						Contact__c = wrap.payment.Contact__c, 
@@ -117,19 +114,19 @@ public with sharing class PersonPaymentsController {
 		persPay.paymentList.add(wrap);
 		return null;
 	}
-	class Person {
+	public class Person {
 		Id contactId {get; set;}
 		public String firstName {get; set;}
 		public String lastName {get; set;}
 		public Decimal totalPayments {get; set;}
 		public Date lastDate {get; set;}
 	}
- 	class PersonPayment {
+ 	public class PersonPayment {
  		public Integer rowNum {get; set;}
  		public Person payor {get; set;}
  		public List<PaymentWrapper> paymentList {get; set;}
  	}
- 	class PaymentWrapper {
+ 	public class PaymentWrapper {
  		public Payment__c payment {get; set;}
  		public Payment__c inputPayment {get; set;}
  		public Boolean isDeleted {get; set;}
