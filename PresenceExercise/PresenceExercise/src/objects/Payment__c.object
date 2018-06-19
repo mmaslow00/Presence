@@ -52,26 +52,59 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
-        <fullName>Total_Payments__c</fullName>
+        <fullName>Amount__c</fullName>
         <externalId>false</externalId>
-        <label>Total Payments</label>
-        <precision>18</precision>
-        <required>false</required>
+        <label>Amount</label>
+        <precision>12</precision>
+        <required>true</required>
         <scale>2</scale>
         <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
-    <label>Project</label>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Payments</relationshipLabel>
+        <relationshipName>Payments</relationshipName>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Date_Paid__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Paid</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Payments</relationshipLabel>
+        <relationshipName>Payments</relationshipName>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Payment</label>
     <listViews>
         <fullName>All</fullName>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
     <nameField>
-        <label>Project Name</label>
-        <type>Text</type>
+        <displayFormat>P-{0000}</displayFormat>
+        <label>Payment Name</label>
+        <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Projects</pluralLabel>
+    <pluralLabel>Payments</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
 </CustomObject>
