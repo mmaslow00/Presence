@@ -1,6 +1,7 @@
 <apex:page controller="PersonPaymentsController"
 sidebar="false" showheader="false" docType="html-5.0"
 >
+
 <style>
 .container {
 	width:70%;
