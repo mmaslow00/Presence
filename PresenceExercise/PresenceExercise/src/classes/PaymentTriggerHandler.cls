@@ -6,18 +6,18 @@ public with sharing class PaymentTriggerHandler {
     		contactIds.add(payment.Contact__c);
     		projectIds.add(payment.Project__c);
     	}
-    	List<sObject> toUpdate = new List<sObject>();
+    	List<SObject> toUpdate = new List<SObject>();
 
     	AggregateResult[] contactSummary = [
-    		select 
-    			Contact__c id, 
+    		SELECT
+    			Contact__c Id,
     			SUM(Amount__c) totalAmount, 
     			MAX(Date_Paid__c) lastDate 
-    		from Payment__c
-    		where Contact__c in :contactIds
-    		group by Contact__c
+    		FROM Payment__c
+    		WHERE Contact__c IN :contactIds
+    		GROUP BY Contact__c
     	];
-    	for(aggregateResult ar : contactSummary) {
+    	for(AggregateResult ar : contactSummary) {
     		Contact personToUpdate = new Contact(
     			Id=(Id)ar.get('id'),
     			Total_Payments__c=(Decimal)ar.get('totalAmount'),
@@ -27,14 +27,14 @@ public with sharing class PaymentTriggerHandler {
     	}
     	
     	AggregateResult[] projectSummary = [
-    		select 
-    			Project__c id, 
+    		SELECT
+    			Project__c Id,
     			SUM(Amount__c) totalAmount 
-    		from Payment__c
-    		where Project__c in :projectIds
-    		group by Project__c
+    		FROM Payment__c
+    		WHERE Project__c IN :projectIds
+    		GROUP BY Project__c
     	];
-    	for(aggregateResult ar : projectSummary) {
+    	for(AggregateResult ar : projectSummary) {
     		Project__c projectToUpdate = new Project__c(
     			Id=(Id)ar.get('id'),
     			Total_Payments__c=(Decimal)ar.get('totalAmount')
